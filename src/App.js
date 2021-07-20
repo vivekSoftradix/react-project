@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Registration from "./Registration";
 import Home from "./Home";
 import EditUser from "./EditUser";
+import View from "./View";
 
 function App() {
   return (
@@ -34,16 +35,20 @@ function App() {
               <Home />
             </Route>
 
-            <Route path="/login">
+            <Route exact path="/login">
               <Login />
             </Route>
 
-            <Route path="/registration">
+            <Route exact path="/registration">
               <Registration />
             </Route>
 
-            <Route path="/users/edit/:id">
+            <Route exact path="/users/edit/:id">
               <EditUser />
+            </Route>
+
+            <Route exact path="/users/:id">
+              <View />
             </Route>
           </Switch>
         </div>

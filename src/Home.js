@@ -16,6 +16,10 @@ function Home() {
   };
   console.log(users);
 
+  const deleteUser = async (id) => {
+    await axios.delete(`http://localhost:3003/users/${id}`);
+    dataReceived();
+  };
   return (
     <div className="home_main_body">
       <div className="table_main_body">
@@ -35,15 +39,15 @@ function Home() {
               <td>{user.phone}</td>
               <td>
                 <div className="threebutton">
-                  <Link className="link" to="/view">
+                  <Link className="link" to={`/users/${user.id}`}>
                     <button>View</button>
                   </Link>
 
-                  <Link className="link" to="/delete">
-                    <button>delete</button>
+                  <Link className="link">
+                    <button onClick={() => deleteUser(user.id)}>delete</button>
                   </Link>
 
-                  <Link className="link" to={`/users/edit/${users.id}`}>
+                  <Link className="link" to={`/users/edit/${user.id}`}>
                     <button>Edit</button>
                   </Link>
                 </div>

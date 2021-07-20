@@ -12,7 +12,7 @@ import { useHistory, useParams } from "react-router-dom";
 function EditUser() {
   let history = useHistory();
   const { id } = useParams();
-  console.log(id);
+
   const [input, setInput] = useState({
     name: "",
     username: "",
@@ -105,9 +105,7 @@ function EditUser() {
           </div>
         </div>
 
-        <div className="registration_right">
-          {/* <img src="image.jpg" alt="img" /> */}
-        </div>
+        <div className="registration_right"></div>
       </div>
     </div>
   );
