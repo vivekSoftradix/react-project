@@ -1,0 +1,21 @@
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(61, 142, 235);
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  border: none;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: rgb(73, 66, 66);
+  font-weight: 500;
+}
