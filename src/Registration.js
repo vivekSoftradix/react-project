@@ -32,16 +32,19 @@ function Registration() {
   };
 
   const hobbiesChanged = (event) => {
-    const name = event.target.name;
+    // const name = event.target.name;
     const value = event.target.value;
-    const id = event.target.value;
+    // const id = event.target.value;
     const checked = event.target.checked;
-
+    //store the value in array
     const arr = [];
     if (checked) {
       arr.push(value);
     }
+
     console.log(arr);
+    //insert array into object
+    input.hobbies.push(arr);
   };
   const onSubmit = (event) => {
     event.preventDefault();
@@ -101,7 +104,7 @@ function Registration() {
     }
   };
 
-  console.log(input);
+  console.log("inputttttttttttt", input);
   return (
     <div className="registration_main_body">
       <div className="secondary_body">
@@ -207,9 +210,8 @@ function Registration() {
                 </select>
               </div>
 
+              <h3>Select your hobbies</h3>
               <div className="form_hobbies">
-                <h4>Select your hobbies</h4>
-
                 <input
                   type="checkbox"
                   id="1"

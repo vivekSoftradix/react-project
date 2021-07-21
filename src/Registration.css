@@ -110,11 +110,20 @@ label {
 
 p {
   color: gray;
-  cursor: pointer;
 }
-p:hover {
-  color: rgba(14, 8, 8, 0.918);
-}
+
 label:hover {
-  color: black;
+  color: rgb(79, 9, 241);
+}
+
+h3 {
+  height: 32px;
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 100;
+}
+
+h4 {
+  font-size: 15px;
+  font-weight: 100;
 }
