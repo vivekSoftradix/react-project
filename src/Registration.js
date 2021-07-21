@@ -43,7 +43,7 @@ function Registration() {
     }
 
     console.log(arr);
-    //insert array into object
+    //insert array into objectsasas
     input.hobbies.push(arr);
   };
   const onSubmit = (event) => {
