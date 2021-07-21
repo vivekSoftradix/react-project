@@ -10,16 +10,19 @@ function Home() {
     dataReceived();
   }, []);
 
+  //display the data
   const dataReceived = async () => {
     const getData = await axios.get("http://localhost:3003/users");
     setUsers(getData.data.reverse());
   };
   console.log(users);
 
+  //delete function
   const deleteUser = async (id) => {
     await axios.delete(`http://localhost:3003/users/${id}`);
     dataReceived();
   };
+
   return (
     <div className="home_main_body">
       <div className="table_main_body">

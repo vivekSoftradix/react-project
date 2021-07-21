@@ -7,8 +7,9 @@
 .secondary_body {
   display: flex;
   height: 80 vh;
-  width: 70vw;
+  width: 80%;
   box-shadow: 0px 2px 3px 2px rgb(112 111 111);
+  padding: 10px;
 }
 
 .registraion_left {
@@ -18,11 +19,11 @@
   flex-direction: column;
 }
 
-.registraion_left > form {
+.form_body {
   display: flex;
   flex-direction: column;
-  width: 30vw;
-  margin-top: 100px;
+  width: 100%;
+  margin-top: 21px;
 }
 
 .icon {
@@ -43,8 +44,45 @@
   background-color: rgb(199, 193, 193);
 }
 
-.registraion_left > h2 {
+.form_radio {
+  margin-top: -2px;
+  border-bottom: 0.2px solid rgba(134, 129, 129, 0.425);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form_role {
+  margin-top: 8px;
+  display: flex;
+  border-bottom: 0.2px solid rgba(134, 129, 129, 0.425);
+  align-items: center;
+  justify-content: space-between;
+  height: 39px;
+}
+.select {
+  height: 36px;
+}
+.radio_label {
+  display: flex;
+  justify-content: space-between;
   margin-top: 10px;
+}
+
+label {
+  color: gray;
+}
+
+.form_hobbies {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 10px;
+  margin-left: -33px;
+  /* border-bottom: 0.2px solid rgba(134, 129, 129, 0.425); */
+}
+.registraion_left > h2 {
+  margin-top: 22px;
   padding: 10px;
   font-size: 50px;
 }
@@ -68,4 +106,15 @@
 
 .registraion_left > form {
   margin-left: 10px;
+}
+
+p {
+  color: gray;
+  cursor: pointer;
+}
+p:hover {
+  color: rgba(14, 8, 8, 0.918);
+}
+label:hover {
+  color: black;
 }

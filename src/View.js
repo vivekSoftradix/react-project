@@ -34,6 +34,7 @@ function View() {
         <li>{input.email}</li>
         <li>{input.phone}</li>
       </div>
+    </div>
   );
 }
 

@@ -32,19 +32,21 @@ function EditUser() {
     getData();
   }, []);
 
+  //get the data
   const getData = async () => {
     const result = await axios.get(`http://localhost:3003/users/${id}`);
     setInput(result.data);
     console.log(result);
   };
 
+  //update the data
   const onSubmit = async (event) => {
     event.preventDefault();
     const result = await axios.put(`http://localhost:3003/users/${id}`, input);
     history.push("/");
   };
 
-  console.log(input);
+  // console.log(input);
   return (
     <div className="registration_main_body">
       <div className="secondary_body">
@@ -60,7 +62,6 @@ function EditUser() {
                 placeholder="Enter your name"
                 name="name"
                 onChange={changeInput}
-                required
               />
             </div>
 

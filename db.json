@@ -1,11 +1,41 @@
 {
   "users": [
     {
-      "name": "Vivek Chaudhary",
-      "username": "Red",
-      "email": "chaudharyvivek54@gmail.com",
-      "phone": "08278706600",
+      "name": "sss",
+      "username": "www",
+      "email": "fff",
+      "phone": "6756",
       "id": 1
+    },
+    {
+      "name": "y",
+      "username": "",
+      "email": "",
+      "phone": "",
+      "id": 2
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "confirm": "",
+      "gender": "",
+      "role": "",
+      "hobbies": "",
+      "contact": "",
+      "username": "sdsd",
+      "id": 3
+    },
+    {
+      "name": "",
+      "email": "",
+      "password": "",
+      "confirm": "",
+      "gender": "",
+      "role": "",
+      "hobbies": "",
+      "contact": "",
+      "id": 4
     }
   ]
 }
