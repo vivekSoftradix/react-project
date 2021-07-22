@@ -32,9 +32,9 @@ function Registration() {
   };
 
   const hobbiesChanged = (event) => {
-    // const name = event.target.name;
+    // const name = event.target.name;dsadsasadsa
     const value = event.target.value;
-    // const id = event.target.value;
+    // const id = event.target.value;adasdsa
     const checked = event.target.checked;
     //store the value in array
     const arr = [];
