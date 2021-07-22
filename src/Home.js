@@ -29,10 +29,14 @@ function Home() {
         <table>
           <tr>
             <th>Name</th>
-            <th>Username</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Action</th>
+            <th>Password</th>
+            <th>Conf.Pass</th>
+            <th>Contact</th>
+            <th>Gender</th>
+            <th>Role</th>
+            <th>Hobbies</th>
           </tr>
           {users.map((user, index) => (
             <tr>

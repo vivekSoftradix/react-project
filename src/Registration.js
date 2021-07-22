@@ -10,9 +10,33 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import PhoneIcon from "@material-ui/icons/Phone";
+import MailIcon from "@material-ui/icons/Mail";
+import swal from "sweetalert";
 
 function Registration() {
-  let history = useHistory();
+  // let history = useHistory();
+  const initialState = {
+    name: "",
+    email: "",
+    password: "",
+    confirm: "",
+    contact: "",
+    gender: "",
+    role: "",
+    hobbies: [],
+  };
+
+  const [valid, setValid] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm: "",
+    contact: "",
+    gender: "",
+    role: "",
+    hobbies: [],
+  });
 
   const [input, setInput] = useState({
     name: "",
@@ -32,76 +56,99 @@ function Registration() {
   };
 
   const hobbiesChanged = (event) => {
-    // const name = event.target.name;dsadsasadsa
     const value = event.target.value;
-    // const id = event.target.value;adasdsa
+    const id = event.target.id;
     const checked = event.target.checked;
+
     //store the value in array
     const arr = [];
     if (checked) {
-      arr.push(value);
+      arr.push(id);
+    } else {
+      arr.pop(id);
     }
 
     console.log(arr);
-    //insert array into objectsasas
-    input.hobbies.push(arr);
+
+    // insert array into objectsasas and filter the id
+
+    let newArray = [...input.hobbies, event.target.id];
+    if (input.hobbies.includes(event.target.id)) {
+      newArray = newArray.filter((day) => day !== event.target.id);
+    }
+    setInput({ hobbies: newArray });
   };
+
+  //submit the data
   const onSubmit = (event) => {
     event.preventDefault();
     // await axios.post("http://localhost:3003/users", input);
     // history.push("/");
+    console.log("inputttttttttttt", input);
     validations();
+
+    // setInput(initialState);
   };
 
   const validations = () => {
+    //user error validations
     if (input.name === "") {
-      console.log("enter the name");
+      setValid({ name: "error" });
+      console.log("validdddddd", valid.name);
       return false;
     }
 
-    if (input.name.length <= 2 || input.name.length > 20) {
-      console.log("user name limit error");
-      return false;
+    if (!isNaN(input.name)) {
+      setValid({ name: "type err" });
     }
-
+    //Email validations
     if (input.email === "") {
-      console.log("enter the data");
+      setValid({ email: "blank" });
+      return false;
+    }
+    const mailformat =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (!input.email.match(mailformat)) {
+      setValid({ email: "invalid" });
+      console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz", input.email);
+      return false;
+    }
+    //Password Validation
+    if (input.password.length <= 5 || input.password.length > 20) {
+      setValid({ password: "short" });
+      return false;
+    }
+    // confirm Password Validation
+    if (input.password !== input.confirm) {
+      setValid({ confirm: "not match" });
+      return false;
+    }
+    // contact number validation
+    if (input.contact.length !== 10) {
+      setValid({ contact: "invalid" });
+      console.log(valid.contact);
       return false;
     }
 
-    if (input.password === "") {
-      console.log("enter the data");
-      return false;
-    }
-
-    if (input.password !== input.confirm.password) {
-      console.log("password not match");
-      return false;
-    } else {
-      console.log("password matches");
-      return true;
-    }
-    if (input.confirm === "") {
-      console.log("enter the data");
-      return false;
-    }
-
-    if (input.contact === "") {
-      console.log("enter the data");
-      return false;
-    }
+    //gender validation
     if (input.gender === "") {
-      console.log("enter the data");
+      setValid({ gender: "select" });
       return false;
     }
+
+    //role validation
     if (input.role === "") {
-      console.log("enter the data");
+      setValid({ role: "select" });
       return false;
     }
-    if (input.hobbies === "") {
-      console.log("enter the data");
-      return false;
+
+    //hobbies validation
+    if (input.hobbies.length === 0) {
+      setValid({ hobbies: "error" });
     }
+
+    swal("", "Registration Successful", "success");
   };
 
   console.log("inputttttttttttt", input);
@@ -122,10 +169,11 @@ function Registration() {
                   name="name"
                   onChange={changeInput}
                 />
+                <small>{valid.name}</small>
               </div>
 
               <div className="icon">
-                <HomeIcon />
+                <MailIcon />
                 <input
                   value={input.email}
                   type="email"
@@ -134,6 +182,7 @@ function Registration() {
                   name="email"
                   onChange={changeInput}
                 />
+                <small>{valid.email}</small>
               </div>
 
               <div className="icon">
@@ -146,6 +195,7 @@ function Registration() {
                   name="password"
                   onChange={changeInput}
                 />
+                <small>{valid.password}</small>
               </div>
 
               <div className="icon">
@@ -157,18 +207,20 @@ function Registration() {
                   name="confirm"
                   onChange={changeInput}
                 />
+                <small>{valid.confirm}</small>
               </div>
 
               <div className="icon">
-                <HomeIcon />
+                <PhoneIcon />
                 <input
                   value={input.contact}
                   autoComplete="off"
-                  type="text"
+                  type="number"
                   placeholder="Contact number"
                   name="contact"
                   onChange={changeInput}
                 />
+                <small>{valid.contact}</small>
               </div>
 
               <div className="form_radio">
@@ -192,6 +244,7 @@ function Registration() {
                     />
                   </div>
                 </RadioGroup>
+                <small>{valid.gender}</small>
               </div>
 
               <div className="form_role">
@@ -208,6 +261,7 @@ function Registration() {
                   <option value="Admin">Admin</option>
                   <option value="Guest">Guest</option>
                 </select>
+                <small>{valid.role}</small>
               </div>
 
               <h3>Select your hobbies</h3>
@@ -236,12 +290,18 @@ function Registration() {
                   value="Swimming"
                 />
                 <p>Swimming</p>
+                <small>{valid.hobbies}</small>
               </div>
             </form>
           </div>
 
           <div className="login_button">
-            <Button variant="contained" color="primary" onClick={onSubmit}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={onSubmit}
+            >
               Register
             </Button>
           </div>

@@ -9,9 +9,13 @@ function View() {
 
   const [input, setInput] = useState({
     name: "",
-    username: "",
     email: "",
-    phone: "",
+    password: "",
+    confirm: "",
+    contact: "",
+    gender: "",
+    role: "",
+    hobbies: [],
   });
 
   useEffect(() => {
@@ -30,9 +34,8 @@ function View() {
 
       <div>
         <li>{input.name}</li>
-        <li>{input.username}</li>
         <li>{input.email}</li>
-        <li>{input.phone}</li>
+        <li>{input.password}</li>
       </div>
     </div>
   );

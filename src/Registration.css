@@ -43,6 +43,9 @@
 .icon > input:hover {
   background-color: rgb(199, 193, 193);
 }
+.icon > input:focus {
+  border-bottom: 1px solid black;
+}
 
 .form_radio {
   margin-top: -2px;
@@ -82,9 +85,9 @@ label {
   /* border-bottom: 0.2px solid rgba(134, 129, 129, 0.425); */
 }
 .registraion_left > h2 {
-  margin-top: 22px;
+  margin-top: 0;
   padding: 10px;
-  font-size: 50px;
+  font-size: 42px;
 }
 
 .registration_right {
@@ -98,9 +101,8 @@ label {
   height: 80vh;
   /* min-width: 80px; */
 }
-
 .login_button {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: 10px;
 }
 
@@ -126,4 +128,9 @@ h3 {
 h4 {
   font-size: 15px;
   font-weight: 100;
+}
+
+small {
+  color: red;
+  text-transform: capitalize;
 }
