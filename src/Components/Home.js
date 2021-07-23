@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Home.css";
+import "../assets/css/Home.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,9 @@ function Home() {
 
   //display the data
   const dataReceived = async () => {
-    const getData = await axios.get("http://localhost:3003/users");
+    const getData = await axios.get(
+      "https://jsonplaceholder.typicode.com/users"
+    );
     setUsers(getData.data.reverse());
   };
   console.log(users);
@@ -29,14 +31,10 @@ function Home() {
         <table>
           <tr>
             <th>Name</th>
+            <th>User name</th>
             <th>Email</th>
             <th>Phone</th>
-            <th>Password</th>
-            <th>Conf.Pass</th>
-            <th>Contact</th>
-            <th>Gender</th>
-            <th>Role</th>
-            <th>Hobbies</th>
+            <th>Button</th>
           </tr>
           {users.map((user, index) => (
             <tr>

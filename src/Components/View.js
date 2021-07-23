@@ -23,7 +23,9 @@ function View() {
   }, []);
 
   const getData = async () => {
-    const result = await axios.get(`http://localhost:3003/users/${id}`);
+    const result = await axios.get(
+      `https://jsonplaceholder.typicode.com/users/${id}`
+    );
     setInput(result.data);
     console.log(result);
   };

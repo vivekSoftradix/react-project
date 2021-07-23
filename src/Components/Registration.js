@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Registration.css";
+import "../assets/css/Registration.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Button from "@material-ui/core/Button";
 import HomeIcon from "@material-ui/icons/Home";
@@ -12,7 +12,6 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import PhoneIcon from "@material-ui/icons/Phone";
 import MailIcon from "@material-ui/icons/Mail";
-import swal from "sweetalert";
 
 function Registration() {
   // let history = useHistory();
@@ -50,33 +49,20 @@ function Registration() {
   });
 
   const changeInput = (event) => {
+    //onChangeHandler
     const name = event.target.name;
     const value = event.target.value;
     setInput({ ...input, [name]: value });
   };
 
-  const hobbiesChanged = (event) => {
-    const value = event.target.value;
-    const id = event.target.id;
-    const checked = event.target.checked;
-
-    //store the value in array
-    const arr = [];
-    if (checked) {
-      arr.push(id);
-    } else {
-      arr.pop(id);
-    }
-
-    console.log(arr);
-
-    // insert array into objectsasas and filter the id
-
+  const onHobbiesChanged = (event) => {
+    const name = event.target.name;
     let newArray = [...input.hobbies, event.target.id];
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", newArray);
     if (input.hobbies.includes(event.target.id)) {
       newArray = newArray.filter((day) => day !== event.target.id);
     }
-    setInput({ hobbies: newArray });
+    setInput({ ...input, [name]: newArray });
   };
 
   //submit the data
@@ -84,10 +70,12 @@ function Registration() {
     event.preventDefault();
     // await axios.post("http://localhost:3003/users", input);
     // history.push("/");
-    console.log("inputttttttttttt", input);
     validations();
 
+    //to clear the values
     // setInput(initialState);
+
+    console.log("input", input);
   };
 
   const validations = () => {
@@ -106,12 +94,10 @@ function Registration() {
       setValid({ email: "blank" });
       return false;
     }
-    const mailformat =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    if (!input.email.match(mailformat)) {
+    if (!input.email.includes("@")) {
       setValid({ email: "invalid" });
-      console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz", input.email);
+      console.log("email", input.email);
       return false;
     }
     //Password Validation
@@ -146,9 +132,9 @@ function Registration() {
     //hobbies validation
     if (input.hobbies.length === 0) {
       setValid({ hobbies: "error" });
+      return false;
     }
-
-    swal("", "Registration Successful", "success");
+    return true;
   };
 
   console.log("inputttttttttttt", input);
@@ -163,7 +149,6 @@ function Registration() {
                 <AccountCircleIcon />
                 <input
                   type="text"
-                  autoComplete="off"
                   value={input.name}
                   placeholder="Enter your name"
                   name="name"
@@ -177,7 +162,6 @@ function Registration() {
                 <input
                   value={input.email}
                   type="email"
-                  autoComplete="off"
                   placeholder="Enter your Email address"
                   name="email"
                   onChange={changeInput}
@@ -189,7 +173,6 @@ function Registration() {
                 <VisibilityIcon />
                 <input
                   value={input.password}
-                  autoComplete="off"
                   type="password"
                   placeholder="Enter password"
                   name="password"
@@ -214,7 +197,6 @@ function Registration() {
                 <PhoneIcon />
                 <input
                   value={input.contact}
-                  autoComplete="off"
                   type="number"
                   placeholder="Contact number"
                   name="contact"
@@ -248,7 +230,7 @@ function Registration() {
               </div>
 
               <div className="form_role">
-                <h4 for="cars">Select your role:</h4>
+                <h4>Select your role:</h4>
 
                 <select
                   className="select"
@@ -271,20 +253,20 @@ function Registration() {
                   id="1"
                   name="hobbies"
                   value="GYM"
-                  onChange={hobbiesChanged}
+                  onChange={onHobbiesChanged}
                 />
                 <p>GYM</p>
                 <input
                   type="checkbox"
                   id="2"
                   name="hobbies"
-                  onChange={hobbiesChanged}
+                  onChange={onHobbiesChanged}
                   value="Reading"
                 />
                 <p>Reading</p>
                 <input
                   type="checkbox"
-                  onChange={hobbiesChanged}
+                  onChange={onHobbiesChanged}
                   id="3"
                   name="hobbies"
                   value="Swimming"

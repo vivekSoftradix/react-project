@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Registration.css";
+import "../assets/css/Registration.css";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Button from "@material-ui/core/Button";
