@@ -14,17 +14,7 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import MailIcon from "@material-ui/icons/Mail";
 
 function Registration() {
-  // let history = useHistory();
-  const initialState = {
-    name: "",
-    email: "",
-    password: "",
-    confirm: "",
-    contact: "",
-    gender: "",
-    role: "",
-    hobbies: [],
-  };
+  let history = useHistory();
 
   const [valid, setValid] = useState({
     name: "",
@@ -66,10 +56,10 @@ function Registration() {
   };
 
   //submit the data
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    // await axios.post("http://localhost:3003/users", input);
-    // history.push("/");
+    await axios.post("http://localhost:3003/users", input);
+    history.push("/");
     validations();
 
     //to clear the values

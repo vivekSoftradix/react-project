@@ -1,41 +1,17 @@
 {
   "users": [
     {
-      "name": "sss",
-      "username": "www",
-      "email": "fff",
-      "phone": "6756",
-      "id": 1
-    },
-    {
-      "name": "y",
-      "username": "",
-      "email": "",
-      "phone": "",
-      "id": 2
-    },
-    {
-      "name": "",
-      "email": "",
-      "password": "",
-      "confirm": "",
-      "gender": "",
-      "role": "",
-      "hobbies": "",
-      "contact": "",
-      "username": "sdsd",
-      "id": 3
-    },
-    {
-      "name": "",
-      "email": "",
-      "password": "",
-      "confirm": "",
-      "gender": "",
-      "role": "",
-      "hobbies": "",
-      "contact": "",
-      "id": 4
+      "name": "cdcsdjadsjjdasf",
+      "email": "aaa@cm",
+      "password": "1111111111",
+      "confirm": "1234567",
+      "contact": "1234567898",
+      "gender": "female",
+      "role": "Guest",
+      "hobbies": [
+        "1"
+      ],
+      "id": 5
     }
   ]
 }

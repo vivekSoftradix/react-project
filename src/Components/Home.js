@@ -10,11 +10,10 @@ function Home() {
     dataReceived();
   }, []);
 
-  //display the data
+  //display the data in home page
   const dataReceived = async () => {
-    const getData = await axios.get(
-      "https://jsonplaceholder.typicode.com/users"
-    );
+    const getData = await axios.get(`http://localhost:3003/users/`);
+
     setUsers(getData.data.reverse());
   };
   console.log(users);
@@ -25,23 +24,34 @@ function Home() {
     dataReceived();
   };
 
-  return (
+  return users.length === 0 ? (
+    <div className="loader"></div>
+  ) : (
     <div className="home_main_body">
       <div className="table_main_body">
         <table>
           <tr>
             <th>Name</th>
-            <th>User name</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>Button</th>
+            <th>Password</th>
+            <th>Confirm</th>
+            <th>Contact</th>
+            <th>Gender</th>
+            <th>Role</th>
+            <th>Hobbies</th>
+            <th>Action</th>
           </tr>
           {users.map((user, index) => (
             <tr>
               <td>{user.name}</td>
-              <td>{user.username}</td>
               <td>{user.email}</td>
-              <td>{user.phone}</td>
+              <td>{user.pasword}</td>
+              <td>{user.confirm}</td>
+              <td>{user.contact}</td>
+              <td>{user.gender}</td>
+              <td>{user.role}</td>
+              <td>{user.hobbies}</td>
+
               <td>
                 <div className="threebutton">
                   <Link className="link" to={`/users/${user.id}`}>

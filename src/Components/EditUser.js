@@ -1,38 +1,123 @@
 import React, { useState, useEffect } from "react";
-import "../assets/css/Registration.css";
-
+import "../assets/css/Registration.css"; //compromising to frm
+import { useHistory, useParams } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Button from "@material-ui/core/Button";
 import PhoneIcon from "@material-ui/icons/Phone";
-import HomeIcon from "@material-ui/icons/Home";
-import FaceIcon from "@material-ui/icons/Face";
 import axios from "axios";
-import { useHistory, useParams } from "react-router-dom";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import MailIcon from "@material-ui/icons/Mail";
 
 function EditUser() {
   let history = useHistory();
   const { id } = useParams();
 
+  const [valid, setValid] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirm: "",
+    contact: "",
+    gender: "",
+    role: "",
+    hobbies: [],
+  });
+
   const [input, setInput] = useState({
     name: "",
-    username: "",
     email: "",
-    phone: "",
+    password: "",
+    confirm: "",
+    contact: "",
+    gender: "",
+    role: "",
+    hobbies: [],
   });
 
   const changeInput = (event) => {
+    //onChangeHandler
     const name = event.target.name;
     const value = event.target.value;
-
     setInput({ ...input, [name]: value });
   };
-  console.log(input);
+
+  const onHobbiesChanged = (event) => {
+    const name = event.target.name;
+    let newArray = [...input.hobbies, event.target.id];
+    if (input.hobbies.includes(event.target.id)) {
+      newArray = newArray.filter((day) => day !== event.target.id);
+    }
+    setInput({ ...input, [name]: newArray });
+  };
+
+  const validations = () => {
+    //user error validations
+    if (input.name === "") {
+      setValid({ name: "error" });
+      console.log("validdddddd", valid.name);
+      return false;
+    }
+
+    if (!isNaN(input.name)) {
+      setValid({ name: "type err" });
+    }
+    //Email validations
+    if (input.email === "") {
+      setValid({ email: "blank" });
+      return false;
+    }
+
+    if (!input.email.includes("@")) {
+      setValid({ email: "invalid" });
+      console.log("email", input.email);
+      return false;
+    }
+    //Password Validation
+    if (input.password.length <= 5 || input.password.length > 20) {
+      setValid({ password: "short" });
+      return false;
+    }
+    // confirm Password Validation
+    if (input.password !== input.confirm) {
+      setValid({ confirm: "not match" });
+      return false;
+    }
+    // contact number validation
+    if (input.contact.length !== 10) {
+      setValid({ contact: "invalid" });
+      console.log(valid.contact);
+      return false;
+    }
+
+    //gender validation
+    if (input.gender === "") {
+      setValid({ gender: "select" });
+      return false;
+    }
+
+    //role validation
+    if (input.role === "") {
+      setValid({ role: "select" });
+      return false;
+    }
+
+    //hobbies validation
+    if (input.hobbies.length === 0) {
+      setValid({ hobbies: "error" });
+      return false;
+    }
+    return true;
+  };
 
   useEffect(() => {
     getData();
   }, []);
 
-  //get the data
+  //get and patch the data
   const getData = async () => {
     const result = await axios.get(`http://localhost:3003/users/${id}`);
     setInput(result.data);
@@ -42,6 +127,8 @@ function EditUser() {
   //update the data
   const onSubmit = async (event) => {
     event.preventDefault();
+    validations();
+
     const result = await axios.put(`http://localhost:3003/users/${id}`, input);
     history.push("/");
   };
@@ -51,56 +138,148 @@ function EditUser() {
     <div className="registration_main_body">
       <div className="secondary_body">
         <div className="registraion_left">
-          <h2>Edit user </h2>
+          <h2>Edit Form</h2>
+          <div className="form_body">
+            <form onSubmit={onSubmit}>
+              <div className="icon">
+                <AccountCircleIcon />
+                <input
+                  type="text"
+                  value={input.name}
+                  placeholder="Enter your name"
+                  name="name"
+                  onChange={changeInput}
+                />
+                <small>{valid.name}</small>
+              </div>
 
-          <form onSubmit={onSubmit}>
-            <div className="icon">
-              <AccountCircleIcon />
-              <input
-                type="text"
-                value={input.name}
-                placeholder="Enter your name"
-                name="name"
-                onChange={changeInput}
-              />
-            </div>
+              <div className="icon">
+                <MailIcon />
+                <input
+                  value={input.email}
+                  type="email"
+                  placeholder="Enter your Email address"
+                  name="email"
+                  onChange={changeInput}
+                />
+                <small>{valid.email}</small>
+              </div>
 
-            <div className="icon">
-              <FaceIcon />
-              <input
-                value={input.username}
-                type="text"
-                placeholder="Ener uesrname"
-                name="username"
-                onChange={changeInput}
-              />
-            </div>
+              <div className="icon">
+                <VisibilityIcon />
+                <input
+                  value={input.password}
+                  type="password"
+                  placeholder="Enter password"
+                  name="password"
+                  onChange={changeInput}
+                />
+                <small>{valid.password}</small>
+              </div>
 
-            <div className="icon">
-              <HomeIcon />
-              <input
-                value={input.email}
-                type="text"
-                placeholder="Enter Email"
-                name="email"
-                onChange={changeInput}
-              />
-            </div>
-            <div className="icon">
-              <PhoneIcon />
+              <div className="icon">
+                <VisibilityOffIcon />
+                <input
+                  value={input.confirm}
+                  type="password"
+                  placeholder="Confirm password"
+                  name="confirm"
+                  onChange={changeInput}
+                />
+                <small>{valid.confirm}</small>
+              </div>
 
-              <input
-                value={input.phone}
-                type="text"
-                placeholder="phone number"
-                name="phone"
-                onChange={changeInput}
-              />
-            </div>
-          </form>
+              <div className="icon">
+                <PhoneIcon />
+                <input
+                  value={input.contact}
+                  type="number"
+                  placeholder="Contact number"
+                  name="contact"
+                  onChange={changeInput}
+                />
+                <small>{valid.contact}</small>
+              </div>
+
+              <div className="form_radio">
+                <h4>Gender</h4>
+                <RadioGroup
+                  aria-label="gender"
+                  name="gender"
+                  value={input.gender}
+                  onChange={changeInput}
+                >
+                  <div className="radio_label">
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="male"
+                      control={<Radio />}
+                      label="Male"
+                    />
+                  </div>
+                </RadioGroup>
+                <small>{valid.gender}</small>
+              </div>
+
+              <div className="form_role">
+                <h4>Select your role:</h4>
+
+                <select
+                  className="select"
+                  value={input.role}
+                  onChange={changeInput}
+                  name="role"
+                >
+                  <option value="">Select</option>
+                  <option value="Super Admin">Super Admin</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Guest">Guest</option>
+                </select>
+                <small>{valid.role}</small>
+              </div>
+
+              <h3>Select your hobbies</h3>
+              <div className="form_hobbies">
+                <input
+                  type="checkbox"
+                  id="1"
+                  name="hobbies"
+                  value="GYM"
+                  onChange={onHobbiesChanged}
+                />
+                <p>GYM</p>
+                <input
+                  type="checkbox"
+                  id="2"
+                  name="hobbies"
+                  onChange={onHobbiesChanged}
+                  value="Reading"
+                />
+                <p>Reading</p>
+                <input
+                  type="checkbox"
+                  onChange={onHobbiesChanged}
+                  id="3"
+                  name="hobbies"
+                  value="Swimming"
+                />
+                <p>Swimming</p>
+                <small>{valid.hobbies}</small>
+              </div>
+            </form>
+          </div>
 
           <div className="login_button">
-            <Button variant="contained" color="primary" onClick={onSubmit}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={onSubmit}
+            >
               Update
             </Button>
           </div>
